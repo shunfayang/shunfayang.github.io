@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="来来来，2017年的第一发，也是第一次认真的写技术博文，想想还是有点小基动啊。我在想，要用以前那种闷骚逗比的文风来写，还是用一本正经的搞学术研究的样子来呢？嗯，我爱咋写咋写，不服打我哈哈哈哈哈。  
+咳咳，进入正题。  
+###MVPMVP，即 Most、Valuable以及Player的缩写，指“最有价值的球员”，嗯，这是它的另一种含义。在软件编程这块，它的意思应该是“Model/View/Pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MVP架构项目有何意义——实战">
+<meta property="og:url" content="http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/index.html">
+<meta property="og:site_name" content="杨顺发">
+<meta property="og:description" content="来来来，2017年的第一发，也是第一次认真的写技术博文，想想还是有点小基动啊。我在想，要用以前那种闷骚逗比的文风来写，还是用一本正经的搞学术研究的样子来呢？嗯，我爱咋写咋写，不服打我哈哈哈哈哈。  
+咳咳，进入正题。  
+###MVPMVP，即 Most、Valuable以及Player的缩写，指“最有价值的球员”，嗯，这是它的另一种含义。在软件编程这块，它的意思应该是“Model/View/Pr">
+<meta property="og:updated_time" content="2017-02-14T15:10:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MVP架构项目有何意义——实战">
+<meta name="twitter:description" content="来来来，2017年的第一发，也是第一次认真的写技术博文，想想还是有点小基动啊。我在想，要用以前那种闷骚逗比的文风来写，还是用一本正经的搞学术研究的样子来呢？嗯，我爱咋写咋写，不服打我哈哈哈哈哈。  
+咳咳，进入正题。  
+###MVPMVP，即 Most、Valuable以及Player的缩写，指“最有价值的球员”，嗯，这是它的另一种含义。在软件编程这块，它的意思应该是“Model/View/Pr">
+    
+    
+        
+          <link rel="shortcut icon" href="/images/moose.jpeg">
+        
+        
+          <link rel="icon" type="image/png" href="/images/moose.jpeg" sizes="192x192">
+        
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/moose.jpeg">
+        
+    
+    <!-- title -->
+    <title>MVP架构项目有何意义——实战</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="ttps://github.com/shunfayang">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2016/12/31/2016年终总结-真的是一年的最终啊/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&text=MVP架构项目有何意义——实战"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&is_video=false&description=MVP架构项目有何意义——实战"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MVP架构项目有何意义——实战&body=Check out this article: http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&name=MVP架构项目有何意义——实战&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        MVP架构项目有何意义——实战
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">杨顺发</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-01-12T14:06:00.000Z" itemprop="datePublished">2017-01-12</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/MVP-architecture/">MVP/architecture</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>来来来，2017年的第一发，也是第一次认真的写技术博文，想想还是有点小基动啊。我在想，要用以前那种闷骚逗比的文风来写，还是用一本正经的搞学术研究的样子来呢？嗯，我爱咋写咋写，不服打我哈哈哈哈哈。  </p>
+<p>咳咳，进入正题。  </p>
+<p>###MVP<br>MVP，即 Most、Valuable以及Player的缩写，指“最有价值的球员”，嗯，这是它的另一种含义。在软件编程这块，它的意思应该是“Model/View/Presenter”，具体的解释我就不对着<a href="https://zh.wikipedia.org/wiki/Model_View_Presenter" target="_blank" rel="external">维基百科的解释</a>照抄了。这里着重说下Presenter，P 持有 M V 的对象，可以理解成 P 把控着它们，该取数据了，拿着 M 去取，取完得显示了，告诉 V 去显示。这个过程中 M V 是没有直接调用的，即我们说的”完全解耦“。基础就说这么多。</p>
+<p>###使用<br>在网上找了许多参考资料及《Android 源码设计模式》一书中的第26章后，开始写demo来练手。还是先来看看P：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class HelpPresenter &#123;</div><div class="line">    private ContractHelp.Model mModel;</div><div class="line">    private ContractHelp.View mView;</div><div class="line"></div><div class="line">    public HelpPresenter(ContractHelp.Model mModel, ContractHelp.View mView) &#123;</div><div class="line">        this.mModel = mModel;</div><div class="line">        this.mView = mView;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码中，HelpPresenter 通过构造注入方式获得Model和View的对象。再看M和V：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class ContractHelp &#123;</div><div class="line">    public interface Model extends IModel&#123;</div><div class="line">        Observable&lt;List&lt;HelpBean&gt;&gt; getHelp();</div><div class="line">    &#125;</div><div class="line">    public interface View extends IView&#123;</div><div class="line">        void showHelpList(List&lt;HelpBean&gt; helpBean);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里通过定义Contract类，将MV的接口都写在一起，解决了接口爆发难管理的问题。这是参考了 google 在github上的<a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">架构示例项目</a>。随后的架构中，几乎都是参照这个sample去实现的。但是经过认真的研究参考，发现架构这块的东西几乎就是上述代码，定义的接口多了几个，在实现View的Activity中new 出Presenter，并注入Model实现类，就可以在Activity中通过<figure class="highlight plain"><figcaption><span>click 或其他操作。Activity，Fragment都是这种书写的方式。那些MVP的有点体现了吗？体现了。如M与V的完全接口，书写MV时尽量做到的单一职责后并复用，都体现出来，代码层次更加清晰，Activity里几乎只负责显示，没有过多业务逻辑，显得干干净净。  </span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">###深入</div><div class="line">如果说MVP的好处仅仅只限于上述的代码解耦直观什么的，显得有点底气不足。后来在简书上看到文章[《解读Android官方MVP项目单元测试》][a]，才发现那个示例项目中的单元测试部分。在此之前，我一直都认为“没时间写测试代码“（有没有必要写单元测试不是这篇文章的主题，关于这点也是编程中一直有争论的一点），用真机测试手动点就好啦。看完那篇博文后，我对MVP有了新的认识：**互相隔离的代码对于单元测试的支持非常好。**既然做到了完全解耦，那么我就可以利用 Mockito和Espresso等测试支持库单独的测试Presenter，单独的测试View（炒鸡强大的Espresso测试其实已经覆盖了P和M）。</div><div class="line">###测试Presenter</div><div class="line">好的，根据[《解读Android官方MVP项目单元测试》][a]以及其他参考资料的学习，基本掌握了Mockito和Espresso的使用。于是在自己的项目中对Presenter进行测试。Presenter中不显示 UI ，也不获取数据，它只负责调度M和V，换言之，P只有业务逻辑。这就好办了。我不需要知道View中如何显示数据，也不care Model中如何获取数据，那怎么来玩儿？嗯，前边提了好几次的Mockito就能玩得666。创建P时通过构造函数注入了M和V，于是我们在测试类中可以通过Mockito去”Mock“M和V，及模拟出假的对象注入到P中，在执行过程中不会真正执行到 mock 出来的M和V中的实际代码。见栗子：</div></pre></td></tr></table></figure></p>
+<p>public class MainPresenterTest {<br>    private MainPresenter presenter;<br>    private MainContract.Model mModel;<br>    private MainContract.View mView;</p>
+<pre><code>@Before
+public void setUp() throws Exception {
+    mModel = mock(MainContract.Model.class);// 1. 创建”假“的Model
+    mView = mock(MainContract.View.class);// 2. 创建”假“的View
+    presenter = new MainPresenter(mModel, mView);// 3.注入到Presenter
+}
+
+@After
+public void tearDown() throws Exception {
+
+}
+
+@Test
+public void getStatisticData() throws Exception {
+    when(mModel.getStatistic(1)).thenReturn(&quot;发哥”);// 4. 当mModel的getStatistic()方法调用的时候，返回“发哥”
+    when(mModel.getStatistic(2)).thenReturn(&quot;是&quot;);// 5. 当mModel的getStatistic()方法调用的时候，返回“是”
+    when(mModel.getStatistic(3)).thenReturn(&quot;大&quot;);// 6. 当mModel的getStatistic()方法调用的时候，返回“大”
+    when(mModel.getStatistic(4)).thenReturn(&quot;帅比&quot;);// 7. 当mModel的getStatistic()方法调用的时候，返回“帅比”
+    presenter.getStatisticDataList(0);// 8. 执行Presenter中的方法
+}
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">由于Presenter不是mock对象，上面第8步执行时，会执行到里边的逻辑代码，当调用到mModel对象中的getStatistic()函数时，会根据4/5/6/7步骤返回对于的数据，从而测试Presenter中的逻辑是否正确。很多时候，我们按下 control+R部署改过后的代码到设备上，坐等几分钟后再手动点击按钮，可能网络挂了进不去，可能得输入账号密码先登录下，可能还得点击好几个页面跳转到刚刚改动的代码页面，却仅仅为了测试几段逻辑。殊不知几分钟甚至更长的时间就这么浪费了。使用Mockito对Presenter进行测试，极大的提高了编码效率。</div><div class="line">###测试View——UI</div><div class="line">作为 Google 官方推出的一个 UI 测试库，Espresso 简直是强大的不得了。不过在学习并应用之后，我认为这玩意跟你是否使用MVP并没有太大的关系。不过既然说都说了，肯定要说完啊对吧。直接跑 Google的 sample中的 test，走起来的姿势是这样的：</div><div class="line"></div><div class="line">![espresso_test]</div><div class="line"></div><div class="line">程序跑起来，自动点击，把自己动手需要三两分钟才能点击完全的操作，在几十秒就点完了。整个测试过程，涵盖了V以及P和M的代码，走的都是真实的逻辑和接口。测试代码如下：</div></pre></td></tr></table></figure></p>
+<pre><code>@Test
+public void editTask() throws Exception {
+    // First add a task
+    createTask(TITLE1, DESCRIPTION);
+
+    // Click on the task on the list
+    onView(withText(TITLE1)).perform(click());
+
+    // Click on the edit task button
+    onView(withId(R.id.fab_edit_task)).perform(click());
+
+    String editTaskTitle = TITLE2;
+    String editTaskDescription = &quot;New Description&quot;;
+
+    // Edit task title and description
+    onView(withId(R.id.add_task_title))
+            .perform(replaceText(editTaskTitle), closeSoftKeyboard()); // Type new task title
+    onView(withId(R.id.add_task_description)).perform(replaceText(editTaskDescription),
+            closeSoftKeyboard()); // Type new task description and close the keyboard
+
+    // Save the task
+    onView(withId(R.id.fab_edit_task_done)).perform(click());
+
+    // Verify task is displayed on screen in the task list.
+    onView(withItemText(editTaskTitle)).check(matches(isDisplayed()));
+
+    // Verify previous task is not displayed
+    onView(withItemText(TITLE1)).check(doesNotExist());
+}
+</code></pre><p>```</p>
+<p>有些人认为写 UI（View）的测试代码没必要，不如直接用手操作来得快。我不晓得表达这些观点的人是否用过 Espresso ，也不晓得他们所在公司的项目是为何种。我只知道，在我学习并在公司项目使用它后，发现调试更加简单（直接运行Test既可Debug，并且可以模拟Intent直接启动目标Activity），测试的涵盖情况也更广（用户输入不同数据，得到接口不同的结果等等），不再需要手动点击各种各样的步骤进入指定页面，着实提高了我的 copy code 啊不，书写优质 code 的效率。</p>
+<p>###测试Model<br>这块测试在我的项目中并不是那么突出。可能是使用 RxJava，固定的数据流请求接口得到的数据直接封装成 java bean 处理完并返回到P层中使用。所以这块并没有着重进行测试。而 Google 的官方栗子中也并没有 Model 层的测试代码。毕竟 Espresso 涵盖了。</p>
+<p>###总结<br>写到这儿，这篇文章的所要表达的点就是 UnitTest 了。对于 UT 该不该写，一直都存在争论。在此之前，我也并不重视 UT，理由也是“没时间写”——分明就是懒嘛，毕竟学习这个东西也是需要时间成本的。学习完并应用到项目中后，才真实的感受到测试代码对效率的提升。</p>
+<p>话说，这篇文章始于一月十二日，那天晚上写完，第二天就直接丢了。现在已是二月十四日，足足拖了一个月啊。虽然这期间一直在折腾内存优化这块。过了一个月，文章衔接度很差了，本来是用自己的项目作为栗子，测试View这块开始却直接使用了 Google 官方栗子，惭愧惭愧。</p>
+<p>以上。</p>
+<p>#####附上学习找的诸多资料供参考：<br><a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">Google官方架构栗子</a><br><a href="www.jianshu.com/p/cf446be43ae8#">解读Android官方MVP项目单元测试 - 简书</a><br><a href="http://www.cnblogs.com/wingyip/p/4513752.html" target="_blank" rel="external">Android Espresso(UI自动化测试)的搭建</a></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="ttps://github.com/shunfayang">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&text=MVP架构项目有何意义——实战"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&is_video=false&description=MVP架构项目有何意义——实战"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MVP架构项目有何意义——实战&body=Check out this article: http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&title=MVP架构项目有何意义——实战"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/01/12/MVP架构项目有何意义——实战/&name=MVP架构项目有何意义——实战&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 杨顺发
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="ttps://github.com/shunfayang">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
