@@ -16,12 +16,14 @@
 <meta property="og:description" content="来来来，2017年的第一发，也是第一次认真的写技术博文，想想还是有点小基动啊。我在想，要用以前那种闷骚逗比的文风来写，还是用一本正经的搞学术研究的样子来呢？嗯，我爱咋写咋写，不服打我哈哈哈哈哈。  
 咳咳，进入正题。  
 ###MVPMVP，即 Most、Valuable以及Player的缩写，指“最有价值的球员”，嗯，这是它的另一种含义。在软件编程这块，它的意思应该是“Model/View/Pr">
-<meta property="og:updated_time" content="2017-02-14T15:17:07.000Z">
+<meta property="og:image" content="http://yoursite.com//gif动图">
+<meta property="og:updated_time" content="2017-02-14T15:18:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVP架构项目有何意义——实战">
 <meta name="twitter:description" content="来来来，2017年的第一发，也是第一次认真的写技术博文，想想还是有点小基动啊。我在想，要用以前那种闷骚逗比的文风来写，还是用一本正经的搞学术研究的样子来呢？嗯，我爱咋写咋写，不服打我哈哈哈哈哈。  
 咳咳，进入正题。  
 ###MVPMVP，即 Most、Valuable以及Player的缩写，指“最有价值的球员”，嗯，这是它的另一种含义。在软件编程这块，它的意思应该是“Model/View/Pr">
+<meta name="twitter:image" content="http://yoursite.com//gif动图">
     
     
         
@@ -146,60 +148,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class HelpPresenter &#123;</div><div class="line">    private ContractHelp.Model mModel;</div><div class="line">    private ContractHelp.View mView;</div><div class="line"></div><div class="line">    public HelpPresenter(ContractHelp.Model mModel, ContractHelp.View mView) &#123;</div><div class="line">        this.mModel = mModel;</div><div class="line">        this.mView = mView;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面代码中，HelpPresenter 通过构造注入方式获得Model和View的对象。再看M和V：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class ContractHelp &#123;</div><div class="line">    public interface Model extends IModel&#123;</div><div class="line">        Observable&lt;List&lt;HelpBean&gt;&gt; getHelp();</div><div class="line">    &#125;</div><div class="line">    public interface View extends IView&#123;</div><div class="line">        void showHelpList(List&lt;HelpBean&gt; helpBean);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里通过定义Contract类，将MV的接口都写在一起，解决了接口爆发难管理的问题。这是参考了 google 在github上的<a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">架构示例项目</a>。随后的架构中，几乎都是参照这个sample去实现的。但是经过认真的研究参考，发现架构这块的东西几乎就是上述代码，定义的接口多了几个，在实现View的Activity中new 出Presenter，并注入Model实现类，就可以在Activity中通过</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">的方式去响应 click 或其他操作。Activity，Fragment都是这种书写的方式。那些MVP的有点体现了吗？体现了。如M与V的完全接口，书写MV时尽量做到的单一职责后并复用，都体现出来，代码层次更加清晰，Activity里几乎只负责显示，没有过多业务逻辑，显得干干净净。  </div><div class="line"></div><div class="line">###深入</div><div class="line">如果说MVP的好处仅仅只限于上述的代码解耦直观什么的，显得有点底气不足。后来在简书上看到文章[《解读Android官方MVP项目单元测试》][a]，才发现那个示例项目中的单元测试部分。在此之前，我一直都认为“没时间写测试代码“（有没有必要写单元测试不是这篇文章的主题，关于这点也是编程中一直有争论的一点），用真机测试手动点就好啦。看完那篇博文后，我对MVP有了新的认识：**互相隔离的代码对于单元测试的支持非常好。**既然做到了完全解耦，那么我就可以利用 Mockito和Espresso等测试支持库单独的测试Presenter，单独的测试View（炒鸡强大的Espresso测试其实已经覆盖了P和M）。</div><div class="line"></div><div class="line">###测试Presenter</div><div class="line">好的，根据[《解读Android官方MVP项目单元测试》][a]以及其他参考资料的学习，基本掌握了Mockito和Espresso的使用。于是在自己的项目中对Presenter进行测试。Presenter中不显示 UI ，也不获取数据，它只负责调度M和V，换言之，P只有业务逻辑。这就好办了。我不需要知道View中如何显示数据，也不care Model中如何获取数据，那怎么来玩儿？嗯，前边提了好几次的Mockito就能玩得666。创建P时通过构造函数注入了M和V，于是我们在测试类中可以通过Mockito去”Mock“M和V，及模拟出假的对象注入到P中，在执行过程中不会真正执行到 mock 出来的M和V中的实际代码。见栗子：</div></pre></td></tr></table></figure>
-<p>public class MainPresenterTest {<br>    private MainPresenter presenter;<br>    private MainContract.Model mModel;<br>    private MainContract.View mView;</p>
-<pre><code>@Before
-public void setUp() throws Exception {
-    mModel = mock(MainContract.Model.class);// 1. 创建”假“的Model
-    mView = mock(MainContract.View.class);// 2. 创建”假“的View
-    presenter = new MainPresenter(mModel, mView);// 3.注入到Presenter
-}
-
-@After
-public void tearDown() throws Exception {
-
-}
-
-@Test
-public void getStatisticData() throws Exception {
-    when(mModel.getStatistic(1)).thenReturn(&quot;发哥”);// 4. 当mModel的getStatistic()方法调用的时候，返回“发哥”
-    when(mModel.getStatistic(2)).thenReturn(&quot;是&quot;);// 5. 当mModel的getStatistic()方法调用的时候，返回“是”
-    when(mModel.getStatistic(3)).thenReturn(&quot;大&quot;);// 6. 当mModel的getStatistic()方法调用的时候，返回“大”
-    when(mModel.getStatistic(4)).thenReturn(&quot;帅比&quot;);// 7. 当mModel的getStatistic()方法调用的时候，返回“帅比”
-    presenter.getStatisticDataList(0);// 8. 执行Presenter中的方法
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">由于Presenter不是mock对象，上面第8步执行时，会执行到里边的逻辑代码，当调用到mModel对象中的getStatistic()函数时，会根据4/5/6/7步骤返回对于的数据，从而测试Presenter中的逻辑是否正确。很多时候，我们按下 control+R部署改过后的代码到设备上，坐等几分钟后再手动点击按钮，可能网络挂了进不去，可能得输入账号密码先登录下，可能还得点击好几个页面跳转到刚刚改动的代码页面，却仅仅为了测试几段逻辑。殊不知几分钟甚至更长的时间就这么浪费了。使用Mockito对Presenter进行测试，极大的提高了编码效率。</div><div class="line">###测试View——UI</div><div class="line">作为 Google 官方推出的一个 UI 测试库，Espresso 简直是强大的不得了。不过在学习并应用之后，我认为这玩意跟你是否使用MVP并没有太大的关系。不过既然说都说了，肯定要说完啊对吧。直接跑 Google的 sample中的 test，走起来的姿势是这样的：</div><div class="line"></div><div class="line">![espresso_test]</div><div class="line"></div><div class="line">程序跑起来，自动点击，把自己动手需要三两分钟才能点击完全的操作，在几十秒就点完了。整个测试过程，涵盖了V以及P和M的代码，走的都是真实的逻辑和接口。测试代码如下：</div></pre></td></tr></table></figure></p>
-<pre><code>@Test
-public void editTask() throws Exception {
-    // First add a task
-    createTask(TITLE1, DESCRIPTION);
-
-    // Click on the task on the list
-    onView(withText(TITLE1)).perform(click());
-
-    // Click on the edit task button
-    onView(withId(R.id.fab_edit_task)).perform(click());
-
-    String editTaskTitle = TITLE2;
-    String editTaskDescription = &quot;New Description&quot;;
-
-    // Edit task title and description
-    onView(withId(R.id.add_task_title))
-            .perform(replaceText(editTaskTitle), closeSoftKeyboard()); // Type new task title
-    onView(withId(R.id.add_task_description)).perform(replaceText(editTaskDescription),
-            closeSoftKeyboard()); // Type new task description and close the keyboard
-
-    // Save the task
-    onView(withId(R.id.fab_edit_task_done)).perform(click());
-
-    // Verify task is displayed on screen in the task list.
-    onView(withItemText(editTaskTitle)).check(matches(isDisplayed()));
-
-    // Verify previous task is not displayed
-    onView(withItemText(TITLE1)).check(doesNotExist());
-}
-</code></pre><p>```</p>
+<p>这里通过定义Contract类，将MV的接口都写在一起，解决了接口爆发难管理的问题。这是参考了 google 在github上的<a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">架构示例项目</a>。随后的架构中，几乎都是参照这个sample去实现的。但是经过认真的研究参考，发现架构这块的东西几乎就是上述代码，定义的接口多了几个，在实现View的Activity中new 出Presenter，并注入Model实现类，就可以在Activity中通过 <strong>mPresenter.loadXXX(2);</strong> 的方式去响应 click 或其他操作。Activity，Fragment都是这种书写的方式。那些MVP的有点体现了吗？体现了。如M与V的完全接口，书写MV时尽量做到的单一职责后并复用，都体现出来，代码层次更加清晰，Activity里几乎只负责显示，没有过多业务逻辑，显得干干净净。  </p>
+<p>###深入<br>如果说MVP的好处仅仅只限于上述的代码解耦直观什么的，显得有点底气不足。后来在简书上看到文章<a href="www.jianshu.com/p/cf446be43ae8#">《解读Android官方MVP项目单元测试》</a>，才发现那个示例项目中的单元测试部分。在此之前，我一直都认为“没时间写测试代码“（有没有必要写单元测试不是这篇文章的主题，关于这点也是编程中一直有争论的一点），用真机测试手动点就好啦。看完那篇博文后，我对MVP有了新的认识：<strong>互相隔离的代码对于单元测试的支持非常好。</strong>既然做到了完全解耦，那么我就可以利用 Mockito和Espresso等测试支持库单独的测试Presenter，单独的测试View（炒鸡强大的Espresso测试其实已经覆盖了P和M）。</p>
+<p>###测试Presenter<br>好的，根据<a href="www.jianshu.com/p/cf446be43ae8#">《解读Android官方MVP项目单元测试》</a>以及其他参考资料的学习，基本掌握了Mockito和Espresso的使用。于是在自己的项目中对Presenter进行测试。Presenter中不显示 UI ，也不获取数据，它只负责调度M和V，换言之，P只有业务逻辑。这就好办了。我不需要知道View中如何显示数据，也不care Model中如何获取数据，那怎么来玩儿？嗯，前边提了好几次的Mockito就能玩得666。创建P时通过构造函数注入了M和V，于是我们在测试类中可以通过Mockito去”Mock“M和V，及模拟出假的对象注入到P中，在执行过程中不会真正执行到 mock 出来的M和V中的实际代码。见栗子：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class MainPresenterTest &#123;</div><div class="line">    private MainPresenter presenter;</div><div class="line">    private MainContract.Model mModel;</div><div class="line">    private MainContract.View mView;</div><div class="line"></div><div class="line">    @Before</div><div class="line">    public void setUp() throws Exception &#123;</div><div class="line">        mModel = mock(MainContract.Model.class);// 1. 创建”假“的Model</div><div class="line">        mView = mock(MainContract.View.class);// 2. 创建”假“的View</div><div class="line">        presenter = new MainPresenter(mModel, mView);// 3.注入到Presenter</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @After</div><div class="line">    public void tearDown() throws Exception &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Test</div><div class="line">    public void getStatisticData() throws Exception &#123;</div><div class="line">        when(mModel.getStatistic(1)).thenReturn(&quot;发哥”);// 4. 当mModel的getStatistic()方法调用的时候，返回“发哥”</div><div class="line">        when(mModel.getStatistic(2)).thenReturn(&quot;是&quot;);// 5. 当mModel的getStatistic()方法调用的时候，返回“是”</div><div class="line">        when(mModel.getStatistic(3)).thenReturn(&quot;大&quot;);// 6. 当mModel的getStatistic()方法调用的时候，返回“大”</div><div class="line">        when(mModel.getStatistic(4)).thenReturn(&quot;帅比&quot;);// 7. 当mModel的getStatistic()方法调用的时候，返回“帅比”</div><div class="line">        presenter.getStatisticDataList(0);// 8. 执行Presenter中的方法</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于Presenter不是mock对象，上面第8步执行时，会执行到里边的逻辑代码，当调用到mModel对象中的getStatistic()函数时，会根据4/5/6/7步骤返回对于的数据，从而测试Presenter中的逻辑是否正确。很多时候，我们按下 control+R部署改过后的代码到设备上，坐等几分钟后再手动点击按钮，可能网络挂了进不去，可能得输入账号密码先登录下，可能还得点击好几个页面跳转到刚刚改动的代码页面，却仅仅为了测试几段逻辑。殊不知几分钟甚至更长的时间就这么浪费了。使用Mockito对Presenter进行测试，极大的提高了编码效率。</p>
+<p>###测试View——UI<br>作为 Google 官方推出的一个 UI 测试库，Espresso 简直是强大的不得了。不过在学习并应用之后，我认为这玩意跟你是否使用MVP并没有太大的关系。不过既然说都说了，肯定要说完啊对吧。直接跑 Google的 sample中的 test，走起来的姿势是这样的：</p>
+<p><img src="//gif动图" alt="espresso_test"></p>
+<p>程序跑起来，自动点击，把自己动手需要三两分钟才能点击完全的操作，在几十秒就点完了。整个测试过程，涵盖了V以及P和M的代码，走的都是真实的逻辑和接口。测试代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">@Test</div><div class="line">public void editTask() throws Exception &#123;</div><div class="line">    // First add a task</div><div class="line">    createTask(TITLE1, DESCRIPTION);</div><div class="line"></div><div class="line">    // Click on the task on the list</div><div class="line">    onView(withText(TITLE1)).perform(click());</div><div class="line"></div><div class="line">    // Click on the edit task button</div><div class="line">    onView(withId(R.id.fab_edit_task)).perform(click());</div><div class="line"></div><div class="line">    String editTaskTitle = TITLE2;</div><div class="line">    String editTaskDescription = &quot;New Description&quot;;</div><div class="line"></div><div class="line">    // Edit task title and description</div><div class="line">    onView(withId(R.id.add_task_title))</div><div class="line">            .perform(replaceText(editTaskTitle), closeSoftKeyboard()); // Type new task title</div><div class="line">    onView(withId(R.id.add_task_description)).perform(replaceText(editTaskDescription),</div><div class="line">            closeSoftKeyboard()); // Type new task description and close the keyboard</div><div class="line"></div><div class="line">    // Save the task</div><div class="line">    onView(withId(R.id.fab_edit_task_done)).perform(click());</div><div class="line"></div><div class="line">    // Verify task is displayed on screen in the task list.</div><div class="line">    onView(withItemText(editTaskTitle)).check(matches(isDisplayed()));</div><div class="line"></div><div class="line">    // Verify previous task is not displayed</div><div class="line">    onView(withItemText(TITLE1)).check(doesNotExist());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>有些人认为写 UI（View）的测试代码没必要，不如直接用手操作来得快。我不晓得表达这些观点的人是否用过 Espresso ，也不晓得他们所在公司的项目是为何种。我只知道，在我学习并在公司项目使用它后，发现调试更加简单（直接运行Test既可Debug，并且可以模拟Intent直接启动目标Activity），测试的涵盖情况也更广（用户输入不同数据，得到接口不同的结果等等），不再需要手动点击各种各样的步骤进入指定页面，着实提高了我的 copy code 啊不，书写优质 code 的效率。</p>
 <p>###测试Model<br>这块测试在我的项目中并不是那么突出。可能是使用 RxJava，固定的数据流请求接口得到的数据直接封装成 java bean 处理完并返回到P层中使用。所以这块并没有着重进行测试。而 Google 的官方栗子中也并没有 Model 层的测试代码。毕竟 Espresso 涵盖了。</p>
 <p>###总结<br>写到这儿，这篇文章的所要表达的点就是 UnitTest 了。对于 UT 该不该写，一直都存在争论。在此之前，我也并不重视 UT，理由也是“没时间写”——分明就是懒嘛，毕竟学习这个东西也是需要时间成本的。学习完并应用到项目中后，才真实的感受到测试代码对效率的提升。</p>
