@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言几年前面试，我都喜欢去网上搜一下“Android 面试大全”“Android 面试宝典”，可是大全和宝典看得再多，面试过程却始终不尽如人意，最后的结果大多是“等通知”。近几年针对很多知识逐个研究击破，然后我也想造个轮子——整理一篇我自己的面试宝典。我先梳理了大致的框架，有基础部分、进阶部分和其他的一些广度知识，然后不断地添加其中的一些细节，比如生命周期，启动模式。在不断的填充以及学习之后，我逐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 知识总结，希望这是你看过的最后一篇">
+<meta property="og:url" content="http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/index.html">
+<meta property="og:site_name" content="发发的二进制地盘">
+<meta property="og:description" content="前言几年前面试，我都喜欢去网上搜一下“Android 面试大全”“Android 面试宝典”，可是大全和宝典看得再多，面试过程却始终不尽如人意，最后的结果大多是“等通知”。近几年针对很多知识逐个研究击破，然后我也想造个轮子——整理一篇我自己的面试宝典。我先梳理了大致的框架，有基础部分、进阶部分和其他的一些广度知识，然后不断地添加其中的一些细节，比如生命周期，启动模式。在不断的填充以及学习之后，我逐">
+<meta property="og:updated_time" content="2021-05-02T14:24:55.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 知识总结，希望这是你看过的最后一篇">
+<meta name="twitter:description" content="前言几年前面试，我都喜欢去网上搜一下“Android 面试大全”“Android 面试宝典”，可是大全和宝典看得再多，面试过程却始终不尽如人意，最后的结果大多是“等通知”。近几年针对很多知识逐个研究击破，然后我也想造个轮子——整理一篇我自己的面试宝典。我先梳理了大致的框架，有基础部分、进阶部分和其他的一些广度知识，然后不断地添加其中的一些细节，比如生命周期，启动模式。在不断的填充以及学习之后，我逐">
+    
+    
+        
+          <link rel="shortcut icon" href="/images/moose.jpeg">
+        
+        
+          <link rel="icon" type="image/png" href="/images/moose.jpeg" sizes="192x192">
+        
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/moose.jpeg">
+        
+    
+    <!-- title -->
+    <title>Android 知识总结，希望这是你看过的最后一篇</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+    <link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+    <!-- jquery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="ttps://github.com/shunfayang">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/01/12/MVP架构项目实战/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&text=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&is_video=false&description=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android 知识总结，希望这是你看过的最后一篇&body=Check out this article: http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&name=Android 知识总结，希望这是你看过的最后一篇&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分割线"><span class="toc-number"></span> <span class="toc-text">分割线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-基础"><span class="toc-number">1.</span> <span class="toc-text">Android 基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-进阶"><span class="toc-number">2.</span> <span class="toc-text">Android 进阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设计模式"><span class="toc-number">3.</span> <span class="toc-text">设计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展知识"><span class="toc-number">4.</span> <span class="toc-text">扩展知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interview-总结-20200107"><span class="toc-number">5.</span> <span class="toc-text">Interview 总结-20200107</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android 知识总结，希望这是你看过的最后一篇
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">发发的二进制地盘</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2021-05-01T15:40:00.000Z" itemprop="datePublished">2021-05-01</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/2021/">2021</a>, <a class="tag-link" href="/tags/Android/">Android</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>几年前面试，我都喜欢去网上搜一下“Android 面试大全”“Android 面试宝典”，可是大全和宝典看得再多，面试过程却始终不尽如人意，最后的结果大多是“等通知”。近几年针对很多知识逐个研究击破，然后我也想造个轮子——整理一篇我自己的面试宝典。我先梳理了大致的框架，有基础部分、进阶部分和其他的一些广度知识，然后不断地添加其中的一些细节，比如生命周期，启动模式。在不断的填充以及学习之后，我逐渐在脑中形成了一个框架，仿佛这些知识彼此之间有一根线，连接彼此，形成一张巨大的知识网：生命周期，在不同的启动模式下，会有怎么的回调过程，在 ams（ActivityManagerService）中，又是如何实现的？关键的点在于，整篇知识总结的每一个字符，都是我在通过大脑思考后写下，抑或不懂的，学习之后总结出来的一些干练的句子。往后我都会不断取翻阅，翻阅的过程中又不断的补充，纠正。我恍然大悟，所谓的面试宝典，不过是作者对于自己的知识的总结，作者自己看到时，脑子里满是当时花好几个小时甚至好几天钻研的过程，只需要几句话几段话，便能将他带回记忆的片段重温学习的过程。而你，看着几行干瘪瘪的句子，感觉自己学会了，然后在跟别人探讨时，却发现自己在背诵，却说不出来为什么，却不知这些知识彼此之间的联系，泛泛而谈。所以啊，我希望这篇“面试宝典”会是你最后一篇面试宝典。关掉我的文章，打开你的 markdown，梳理你的知识，补充你的知识，让你的知识形成框架，然后在框架之中不断填入新掌握的知识，最后形成一张强大的网，这样，你才是真正掌握这些知识。<br>学习总结记录不是为了面试。</p>
+<p>20210501 周六 23:40 updated  来自劳动节的劳动。</p>
+<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><h3 id="Android-基础"><a href="#Android-基础" class="headerlink" title="Android 基础"></a>Android 基础</h3><ul>
+<li><p>Activity 生命周期</p>
+<ul>
+<li>onCreate 是必须实现的，需要做一些数据设置绑定的操作；</li>
+<li>onStart 用户可见，进程进入前台，可以做一些支持交互的逻辑。比较快完成，此回调结束后会立刻进入下一阶段；</li>
+<li>onResume 应用与用户交互阶段。如果启动一个透明 dialog 或者回到 Launcher 后重新进入 activity，会重新回调此方法；</li>
+<li>onPause 此时失去焦点，成为后台进程。如启动一个透明 dialog，会回调，关闭 dialog 后，又会回到 onReusme；</li>
+<li>onStop 回到主页或者别的非透明页面会回调，此时不再可见。可以做一些暂停动画，调整或释放不可见时的无用资源。这里也可以做一些持久性存储的工作，耗时可以长点，与 onStart 相反。</li>
+<li>onDestroy 销毁 Activity 前调用。finish Activity 或者配置变化（横屏：销毁后立刻重建新对象执行新 onCreate）。这里应该释放所有资源（onStop 释放一部分）。</li>
+<li>onRestart 从另一个非透明界面重新进入，会回到此方法，然后回调 onStart -&gt; onResume。</li>
+<li><strong>todo: 继续看 aosp 源码研究</strong></li>
+</ul>
+</li>
+<li><p>Activity 启动模式</p>
+<ul>
+<li>singleTask 是栈内只有一个目标 Activity，如果已经存在，直接复用，如果不是在最顶端，就把目标 Activity 上面的 activity 清空。</li>
+<li>singleTop 就是顶部有就复用，没有就新建。</li>
+</ul>
+<ul>
+<li><strong>todo: 继续看源码研究</strong></li>
+</ul>
+</li>
+<li><p>android 中的动画有哪些：<a href="https://www.jianshu.com/p/0eb89d43eea4" target="_blank" rel="external">Android 一共有多少种动画？准确告诉你！</a>、<a href="https://hencoder.com/ui-1-6/" target="_blank" rel="external">HenCoder Android 自定义 View 1-6：属性动画 Property Animation（上手篇）</a></p>
+<ul>
+<li>View 动画</li>
+<li>帧动画</li>
+<li>属性动画</li>
+</ul>
+</li>
+<li><p>View 事件分发机制</p>
+<ul>
+<li>requestDisallowInterceptTouchEvent(true), 请求父控件不拦截事件，会直接使得不执行 onInterceptTouchEvent()。</li>
+<li>点击屏幕-ams-activity-ViewGroup-View—处理—&gt;view.onTouchEvent()</li>
+<li>点击屏幕-ams-activity-ViewGroup-View—不处理—&gt;ViewGroup.dispatchTouchEvent()—-不处理—-&gt;继续往上直至无人处理。</li>
+<li>扩展：Behavior</li>
+</ul>
+</li>
+<li><p>自定义 View 绘制流程<br>onMeasure：测量宽高，需要单独处理 wrap_content，不然与 match_parent 效果一致；<br>onDraw：画圆画圈等绘制，<strong>需要深入复习 canvas 和 Paint 的功能；</strong><br>onLayout：集成 ViewGroup 需要重写这个方法，用于布置子 View 的位置，<em>可以参看 LinearLayout 源码。</em></p>
+</li>
+<li>自定义 View 优化<br>如 Rect.clipRect，应该是这个，可以优化绘制区域；onDraw/onMeasure/onLayout 中不 new 对象，不打印 log；动画使用属性动画，不直接使用 Thread，可控。</li>
+<li>自定义 View 对 wrap_content 的讨论<ul>
+<li>自定义 View 不处理 wrap_content 的情况下，不管父控件是 wrap_content 还是 match_parent，显示的效果都是撑开父控件到最大，换言之就是，都是 match_parent 的效果，都是占用父控件的最大宽度（或高度）。参看 TextView 的 onMeasure 实现，根据 padding、文字宽高、最小宽高等算出来一个值。甚至我可以理解成，<strong>wrap_content 就是需要具体控件去给出一个值。</strong></li>
+</ul>
+</li>
+<li>Handler 机制-原理-源码<ul>
+<li>核心：队列。主线程轮询队列，子线程往队列里添加数据。</li>
+</ul>
+</li>
+<li>存储相关：数据库、文件</li>
+</ul>
+<h3 id="Android-进阶"><a href="#Android-进阶" class="headerlink" title="Android 进阶"></a>Android 进阶</h3><ul>
+<li>性能优化：见文档 <a href="https://app.yinxiang.com/shard/s65/nl/33048323/f88fc2e5-20e6-4c64-b69d-af56aa908887/" target="_blank" rel="external">【Android】 性能优化</a></li>
+<li><strong>todo：电量调优可以研究一下</strong></li>
+<li>网络、IO、电量、启动等优化，参看文章：<a href="https://androidperformance.com/2019/11/18/Android-App-Lunch-Optimize/" target="_blank" rel="external">Android App 启动优化全记录</a></li>
+</ul>
+<ul>
+<li>Glide 源码、OKHttp 源码、RxJava 源码：三选二</li>
+</ul>
+<ul>
+<li>View 绘制原理（不是自定义 View）：看了一篇文章，以 systrace 使用为基础讲解关于 MainThread 和 RenderThread 的，有点心得。将“View 绘制原理”这条加入 Android 进阶目录下的初衷是，想学习绘制原理，在叙述自定义 View 时，好讲的深入点。然后看完这篇文章后，我有新的想法——熟悉“View 绘制原理”有助于 systrace 的使用，可以用来分析卡顿和 ANR。前者只是为了面试，后者是有实用意义的，好处是，学习的东西不再那么虚无缥缈。建议顺序阅读如下文章，并根据阅读疑问继续阅读文章中关于 Vsync、Input等文章。文章1 <a href="https://www.androidperformance.com/2019/11/06/Android-Systrace-MainThread-And-RenderThread/" target="_blank" rel="external">Android Systrace 基础知识 - MainThread 和 RenderThread 解读</a>、文章2 <a href="https://www.androidperformance.com/2019/10/22/Android-Choreographer/" target="_blank" rel="external">Android Tech And Perf<br>Android 基于 Choreographer 的渲染机制详解</a>、文章3 <a href="https://www.androidperformance.com/2020/02/14/Android-Systrace-SurfaceFlinger" target="_blank" rel="external">Android Systrace 基础知识 - SurfaceFlinger 解读</a><ul>
+<li>硬件每隔 16.6666ms 发出 Vsync 信号，渲染层（app）由 Choreographer 处理，最终走到 doFrame，整理好 DisplayList（填充显示缓存区即 buffer）；合成层由 SurfaceFlinger 处理合成，生成纹理，交给 HWComposer 显示：有疑问，待确认。</li>
+</ul>
+</li>
+<li>SurfaceView 如何使用？与 View 有什么区别？</li>
+</ul>
+<ul>
+<li>事件分发更深层次原理：Input。本质上，Input 是一种消息，毕竟 Android 中的主线程是消息驱动的。屏幕有采样率，一般屏幕的采样率是 120Hz，当然现在 Android 主流已经是 120Hz 的刷新率，采样率更高了。当用户手指点击屏幕时（包含触摸和Home 等按钮），InputReader 会收到监听消息，读取到的 Input 消息会交给 InputDispatcher 进行消息分发；注册过的 App，其实就是当前屏幕上显示的 App，会收到 Input 消息，然后开始进行最最常见的 “事件分发机制”，其实就是把 Input 消息给到 ViewRootImpl，然后给到 Activiy 中 View 的根节点——DecorView。事件分发过程中，View 如果变化，又会去请求 Vsync 进行一帧的绘制，见文章2。<ul>
+<li>参考文章：<a href="https://www.androidperformance.com/2019/11/04/Android-Systrace-Input/" target="_blank" rel="external">Android Systrace 基础知识 - Input 解读</a>、文章2<a href="https://www.androidperformance.com/2019/12/01/Android-Systrace-Vsync/" target="_blank" rel="external">Android Systrace 基础知识 - Vsync 解读</a></li>
+<li><code>$ adb shell dumpsys input</code> 用于获取 input 的 dumpsys 信息</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>todo：gradle 可以好好研究一下，不但面试是亮点，以后工作肯定也会用上。</strong></li>
+</ul>
+<ul>
+<li>framework AMS 相关，如 App 启动流程，开机启动流程，类是什么时候怎么加载的，LMK 机制等等。进程管理。任务栈。</li>
+<li><p>应用启动流程</p>
+<ol>
+<li>假设在 Launcher 中点击微信</li>
+<li>Launcher 所在进程会拿着微信相关的信息（如包名）通过 ams 的代理 binder 对象去调用 startActivity</li>
+<li>代理 binder 访问 binder 驱动从 systemServer 中获取的 ams 在公共空间里的引用，最终调用到 ams 中 startActivity</li>
+<li>ams 让调用方进入 onPause</li>
+<li>ams 中进行一系列的逻辑后，判断是新启动的应用，那么就会通过 socket 通知 zygote 进程，fork 出一个新的应用的进程</li>
+<li>新应用进程会调用 ActivityThread 的 main 方法</li>
+<li>新应用进程在 main 执行后，将自己的 applicationThread 的 binder attach 到 ams，用于管理生命周期等</li>
+<li>ams 会通过新应用的 applicationThread 去创建 Activity 并调用 onCreate 等生命周期函数</li>
+<li>新应用进入 resume 状态后，往 H 中添加了一个 idleHandler 通知 ams。</li>
+</ol>
+</li>
+<li><p>AIDL</p>
+<ol>
+<li>创建 aidl 文件，扩展自己的方法</li>
+<li>创建服务时，实现 aidl 生成的 .Stub（集成 Binder）并在onBind 时返回对象。</li>
+<li>客户端获得 1 中的 aidl 文件，绑定服务时，使用 aidl 生成的 .Stub 的 asInterface（） 把 Binder 转成服务提供的 Binder 类型。</li>
+<li>传递对象需要实现 Parcelable。</li>
+<li>参考资料：<a href="https://developer.android.com/guide/components/aidl?hl=zh-cn#java" target="_blank" rel="external">Google 官方-Android 接口定义语言 (AIDL)</a></li>
+</ol>
+</li>
+<li><p>Binder<br>研究了几篇文章下来，大致对 Binder 的认识如下：</p>
+<ol>
+<li>Server-Client 的机制</li>
+<li>内存拷贝一次，发生在用户空间向内核空间拷贝的过程中</li>
+<li>ServiceManager 用于注册管理所有的 Server，访问 smgr 本身也是通过 Binder 通讯。</li>
+<li>Client 与 Server 访问的是内核空间中同一块地址</li>
+<li>0 号引用预留给 ServiceManger。</li>
+<li>一次拷贝，性能仅次于共享内存</li>
+<li>参考资料：<a href="https://blog.csdn.net/universus/article/details/6211589" target="_blank" rel="external">Android Binder设计与实现 - 设计篇</a>、<a href="https://blog.csdn.net/luoshengyang/article/details/6618363" target="_blank" rel="external">Android进程间通信（IPC）机制Binder简要介绍和学习计划</a></li>
+</ol>
+</li>
+</ul>
+<h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><ul>
+<li>MVP，MVVM，MVC解释和实践<ul>
+<li>MVVM：<a href="https://www.jianshu.com/p/e7628d6e6f61" target="_blank" rel="external">Mvvm模式: Databinding 与 ViewModel+LiveData+Repository</a></li>
+</ul>
+</li>
+<li>组件化：<strong>todo：router</strong></li>
+<li>设计模式：以前有用过的，模板方法模式、策略模式、抽象方法模式、工厂模式等等，需要复习一遍<ul>
+<li>单例模式，最佳懒汉式实现——静态内部类方式，不调用不会加载静态内部类。</li>
+<li>策略模式，对修改关闭，对扩展开放</li>
+</ul>
+</li>
+</ul>
+<h3 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h3><ul>
+<li>JetPack Compose</li>
+<li>Flutter </li>
+<li>Git 命令行</li>
+<li>DataBinding 原理</li>
+<li>插件化开发、热更新：一种是 ClassLoader，就是以前我研究过的方案；一种是字节码层面的。</li>
+</ul>
+<h3 id="Interview-总结-20200107"><a href="#Interview-总结-20200107" class="headerlink" title="Interview 总结-20200107"></a>Interview 总结-20200107</h3><p><strong>刚刚好复习的知识都考察到了。细细一想，生命周期和启动模式倒是没复习到。</strong></p>
+<ul>
+<li>HashMap 二次 hash</li>
+<li>View 绘制流程对 wrap_content 的讨论</li>
+<li>View 事件分发</li>
+<li>Activity 生命周期</li>
+<li>启动模式</li>
+</ul>
+<p>我果然一直以来对 singleTop 和 singleTask 都是混淆的。这次面试之后，再找资料认真对比研究后，印象就更加深刻了。<br>  看完官网对于启动模式的文章，写了个 demo 验证，效果基本和文章一致。但有些说明与袁也上次说的类似，并且 demo 看不出效果。所以我觉得还是得从源码入手分析研究，才会让人更加印象深刻。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="ttps://github.com/shunfayang">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分割线"><span class="toc-number"></span> <span class="toc-text">分割线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-基础"><span class="toc-number">1.</span> <span class="toc-text">Android 基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-进阶"><span class="toc-number">2.</span> <span class="toc-text">Android 进阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设计模式"><span class="toc-number">3.</span> <span class="toc-text">设计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展知识"><span class="toc-number">4.</span> <span class="toc-text">扩展知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interview-总结-20200107"><span class="toc-number">5.</span> <span class="toc-text">Interview 总结-20200107</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&text=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&is_video=false&description=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android 知识总结，希望这是你看过的最后一篇&body=Check out this article: http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&name=Android 知识总结，希望这是你看过的最后一篇&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 发发的二进制地盘
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="ttps://github.com/shunfayang">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
