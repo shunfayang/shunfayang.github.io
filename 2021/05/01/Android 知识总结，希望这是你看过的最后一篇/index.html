@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="前言几年前面试，我都喜欢去网上搜一下“Android 面试大全”“Android 面试宝典”，可是大全和宝典看得再多，面试过程却始终不尽如人意，最后的结果大多是“等通知”。近几年针对很多知识逐个研究击破，然后我也想造个轮子——整理一篇我自己的面试宝典。我先梳理了大致的框架，有基础部分、进阶部分和其他的一些广度知识，然后不断地添加其中的一些细节，比如生命周期，启动模式。在不断的填充以及学习之后，我逐">
 <meta property="og:type" content="article">
-<meta property="og:title" content="杨顺发">
-<meta property="og:url" content="http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/index.html">
+<meta property="og:title" content="Android 知识总结，希望这是你看过的最后一篇">
+<meta property="og:url" content="http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/index.html">
 <meta property="og:site_name" content="杨顺发">
 <meta property="og:description" content="前言几年前面试，我都喜欢去网上搜一下“Android 面试大全”“Android 面试宝典”，可是大全和宝典看得再多，面试过程却始终不尽如人意，最后的结果大多是“等通知”。近几年针对很多知识逐个研究击破，然后我也想造个轮子——整理一篇我自己的面试宝典。我先梳理了大致的框架，有基础部分、进阶部分和其他的一些广度知识，然后不断地添加其中的一些细节，比如生命周期，启动模式。在不断的填充以及学习之后，我逐">
-<meta property="og:updated_time" content="2021-05-01T22:18:26.075Z">
+<meta property="og:updated_time" content="2021-05-02T14:05:10.197Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="杨顺发">
+<meta name="twitter:title" content="Android 知识总结，希望这是你看过的最后一篇">
 <meta name="twitter:description" content="前言几年前面试，我都喜欢去网上搜一下“Android 面试大全”“Android 面试宝典”，可是大全和宝典看得再多，面试过程却始终不尽如人意，最后的结果大多是“等通知”。近几年针对很多知识逐个研究击破，然后我也想造个轮子——整理一篇我自己的面试宝典。我先梳理了大致的框架，有基础部分、进阶部分和其他的一些广度知识，然后不断地添加其中的一些细节，比如生命周期，启动模式。在不断的填充以及学习之后，我逐">
     
     
@@ -29,7 +29,7 @@
         
     
     <!-- title -->
-    <title>杨顺发</title>
+    <title>Android 知识总结，希望这是你看过的最后一篇</title>
     <!-- styles -->
     <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
@@ -80,16 +80,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&text="><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&is_video=false&description="><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&name=&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&text=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&is_video=false&description=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android 知识总结，希望这是你看过的最后一篇&body=Check out this article: http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&name=Android 知识总结，希望这是你看过的最后一篇&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -106,7 +106,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        
+        Android 知识总结，希望这是你看过的最后一篇
     </h1>
 
 
@@ -117,11 +117,16 @@
       </span>
       
     <div class="postdate">
-        <time datetime="2021-05-01T22:18:26.075Z" itemprop="datePublished">2021-05-02</time>
+        <time datetime="2021-05-01T15:40:00.000Z" itemprop="datePublished">2021-05-01</time>
     </div>
 
 
       
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/2021-Android/">2021,Android</a>
+    </div>
+
 
     </div>
   </header>
@@ -300,16 +305,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&text="><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&is_video=false&description="><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&title="><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/05/02/Android 知识总结，希望这是你看过的最后一篇/&name=&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&text=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&is_video=false&description=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android 知识总结，希望这是你看过的最后一篇&body=Check out this article: http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&title=Android 知识总结，希望这是你看过的最后一篇"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2021/05/01/Android 知识总结，希望这是你看过的最后一篇/&name=Android 知识总结，希望这是你看过的最后一篇&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
